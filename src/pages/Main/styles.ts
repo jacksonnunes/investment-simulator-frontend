@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideTop = keyframes`
+from {
+  opacity: 0;
+  transform: translateY(-50%);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -7,6 +18,8 @@ export const Container = styled.div`
   align-items: center;
 
   height: 100vh;
+
+  animation: ${slideTop} 0.8s cubic-bezier(0, 0, 0.2, 1);
 
   h3 {
     margin-bottom: 24px;
@@ -43,6 +56,7 @@ export const Container = styled.div`
 
     background-color: var(--primary);
     color: var(--text);
+    font-size: 13.7px;
     font-weight: 500;
 
     width: calc(100% - 24px);

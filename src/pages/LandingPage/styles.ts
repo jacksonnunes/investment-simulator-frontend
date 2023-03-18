@@ -1,4 +1,48 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideRight = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+const slideRightSmall = keyframes`
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+`;
+
+const slideTop = keyframes`
+from {
+  opacity: 0;
+  transform: translateY(100%);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+`;
+
+const slideBottom = keyframes`
+from {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+`;
 
 export const Container = styled.div`
   position: relative;
@@ -8,6 +52,10 @@ export const Container = styled.div`
 
   padding: 24px;
   height: 100vh;
+
+  img {
+    animation: ${slideRight} 0.4s cubic-bezier(0, 0, 0.2, 1);
+  }
 
   @media only screen and (max-width: 1024px) {
     img {
@@ -19,6 +67,7 @@ export const Container = styled.div`
 
       max-width: 95%;
       filter: opacity(25%);
+      animation: ${slideRightSmall} 0.4s cubic-bezier(0, 0, 0.2, 1);
     }
   }
 `;
@@ -33,6 +82,8 @@ export const Main = styled.main`
   height: 100vh;
 
   div {
+    animation: ${slideBottom} 0.3s cubic-bezier(0, 0, 0.2, 1) 0.4s backwards;
+
     h1 {
       font-size: 3.65rem;
       font-weight: 700;
@@ -56,6 +107,7 @@ export const Main = styled.main`
 
     padding: 1.75rem;
     border-radius: 8px;
+    animation: ${slideTop} 0.3s cubic-bezier(0, 0, 0.2, 1) 0.7s backwards;
   }
 
   @media only screen and (max-width: 1024px) {

@@ -24,6 +24,7 @@ import { InvestmentProps } from '../../types/investment';
 
 import { Container } from './styles';
 import { Link } from 'react-router-dom';
+import { Loading } from '../../components/Loading';
 
 
 interface InvestmentFormData {
@@ -40,6 +41,7 @@ export const Main: React.FC = () => {
   const { investment, setNewInvestment, getSimulations } = useInvestment();
 
   const [taxaReferencia, setTaxaReferencia] = useState(formRef.current?.getFieldValue('taxaReferencia'));
+  const [isLoading, setIsLoading] = useState(false);
 
   const percentualAtualizacaoLabel = {
     CDI: 'Porcentagem do CDI',
@@ -53,6 +55,7 @@ export const Main: React.FC = () => {
   }, []);
 
   const handleSubmit = useCallback(async (data: InvestmentFormData) => {
+    setIsLoading(true);
     try {
       formRef.current?.setErrors({});
 
@@ -154,10 +157,22 @@ export const Main: React.FC = () => {
           )
         }
 
-        <button type="submit">Calcular</button>
+        <button type="submit">
+          {
+            isLoading ? (
+              <Loading />
+            ) : (
+              'Calcular'
+            )
+          }
+        </button>
       </Form>
 
-      <Link to="/simulations">Comparar simulações</Link>
+      {
+        getSimulations().length >= 2 && (
+          <Link to="/simulations">Comparar simulações</Link>
+        )
+      }
 
       {
         Object.keys(investment).length > 0 && (
