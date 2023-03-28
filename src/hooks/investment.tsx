@@ -16,6 +16,7 @@ interface InvestmentContextData {
   setNewInvestment(investment: InvestmentProps): void;
   removeInvestment(): void;
   getSimulations(): InvestmentProps[];
+  cleanSimulations(): void;
 }
 
 const InvestmentContext = createContext<InvestmentContextData>({} as InvestmentContextData);
@@ -55,12 +56,17 @@ export const InvestmentProvider: React.FC<Props> = ({ children }) => {
     }
   }, []);
 
+  const cleanSimulations = useCallback(() => {
+    sessionStorage.removeItem(storageKey);
+  }, []);
+
   return (
     <InvestmentContext.Provider value={{
       investment,
       setNewInvestment,
       removeInvestment,
       getSimulations,
+      cleanSimulations,
     }}>
       { children }
     </InvestmentContext.Provider>

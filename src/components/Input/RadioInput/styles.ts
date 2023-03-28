@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
@@ -10,6 +10,8 @@ export const Container = styled.div`
 
   section {
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-bottom: 8px;
   }
@@ -25,6 +27,9 @@ export const Option = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  margin-right: 30px;
+  margin-bottom: 4px;
 
   label {
     display: flex;
@@ -52,10 +57,6 @@ export const Option = styled.div`
     input:checked + div {
       visibility: visible;
     }
-  }
-
-  & + div {
-    margin-left: 30px;
   }
 
   span {

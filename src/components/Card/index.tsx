@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Content } from './styles';
 
 import { useInvestment } from '../../hooks/investment';
-
+import { currencyFormat } from '../../utils/currencyFormat';
 import { InvestmentProps } from '../../types/investment';
 
 export const Card: React.FC<InvestmentProps> = ({
@@ -18,18 +18,18 @@ export const Card: React.FC<InvestmentProps> = ({
     <Container>
       <Content>
         <div>
-          <p><strong>Tesouro Direto</strong></p>
-          <p><strong>Tempo de investimento: 2 anos</strong></p>
-          <p><strong>Rentabilidade: 100,00% do CDI</strong></p>
+          <p><strong>{ modalidade }</strong></p>
+          <p><strong>{ `Tempo de investimento: ${tempoInvestimento}` }</strong></p>
+          <p><strong>{ `Rentabilidade: ${rentabilidade}` }</strong></p>
         </div>
 
         <div>
-          <p>Valor investido: R$ 10.000,00</p>
-          <p>Rendimento bruto: R$ 235,00</p>
-          <p>IR: R$ 35,00</p>
-          <p>IOF: R$ 0,00</p>
-          <p>Rendimento líquido: R$ 200,00</p>
-          <p>Valor de resgate: R$ 10.200,00</p>
+          <p>{ `Valor investido: ${currencyFormat(valorInvestido)}` }</p>
+          <p>{ `Rendimento bruto: ${currencyFormat(parametros.rentabilidadeBruta)}` }</p>
+          <p>{ `IR: ${currencyFormat(parametros.valorImpostoRenda)}` }</p>
+          <p>{ `IOF: ${currencyFormat(parametros.valorIof)}` }</p>
+          <p>{ `Rendimento líquido: ${currencyFormat(parametros.rentabilidadeLiquida)}` }</p>
+          <p>{ `Valor de resgate: ${currencyFormat(parametros.montante)}` }</p>
         </div>
 
         <button type="button" onClick={removeInvestment}>Nova simulação</button>

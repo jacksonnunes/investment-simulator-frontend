@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -15,6 +16,7 @@ import { AppError } from '../../errors/app.error';
 
 import { Card } from '../../components/Card';
 import { Input } from '../../components/Input';
+import { Loading } from '../../components/Loading';
 import { SelectInput } from '../../components/Input/SelectInput';
 import { RadioInput } from '../../components/Input/RadioInput';
 
@@ -23,9 +25,6 @@ import { useInvestment } from '../../hooks/investment';
 import { InvestmentProps } from '../../types/investment';
 
 import { Container } from './styles';
-import { Link } from 'react-router-dom';
-import { Loading } from '../../components/Loading';
-
 
 interface InvestmentFormData {
   modalidade: string;
@@ -111,6 +110,7 @@ export const Main: React.FC = () => {
       const response = await api.post<InvestmentProps>('/calculos/calcular', data);
 
       setNewInvestment(response.data);
+      setIsLoading(false);
     } catch (e) {
       if (e instanceof Yup.ValidationError) {
         const errors = getValidationErrors(e);
@@ -118,6 +118,7 @@ export const Main: React.FC = () => {
       } else if (e instanceof AppError) {
         console.log(e);
       }
+      setIsLoading(false);
     }
   }, []);
 
